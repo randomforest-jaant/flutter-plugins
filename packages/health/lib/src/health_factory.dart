@@ -138,6 +138,8 @@ class HealthFactory {
     } catch (error) {
       print("Health Plugin Error:\n");
       print("\t$error");
+
+      return Future.error(error);
     }
     return healthData;
   }
