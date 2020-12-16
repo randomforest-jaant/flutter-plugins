@@ -2,6 +2,7 @@ part of health;
 
 /// A [HealthDataPoint] object corresponds to a data point captures from GoogleFit or Apple HealthKit
 class HealthDataPoint {
+  String uuid;
   num _value;
   HealthDataType _type;
   HealthDataUnit _unit;
@@ -10,7 +11,7 @@ class HealthDataPoint {
   PlatformType _platform;
   String _deviceId;
 
-  HealthDataPoint._(this._value, this._type, this._unit, this._dateFrom,
+  HealthDataPoint(this.uuid, this._value, this._type, this._unit, this._dateFrom,
       this._dateTo, this._platform, this._deviceId) {
     /// Set the value to minutes rather than the category
     /// returned by the native API

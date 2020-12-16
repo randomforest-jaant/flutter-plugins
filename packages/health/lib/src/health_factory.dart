@@ -52,7 +52,8 @@ class HealthFactory {
     for (int i = 0; i < weights.length; i++) {
       double bmiValue = weights[i].value.toDouble() / (h * h);
       print('BMI: $bmiValue');
-      HealthDataPoint x = HealthDataPoint._(
+      HealthDataPoint x = HealthDataPoint(
+          "TODO: <UUID>",
           bmiValue,
           HealthDataType.BODY_MASS_INDEX,
           unit,
@@ -119,11 +120,12 @@ class HealthFactory {
     try {
       List fetchedDataPoints = await _channel.invokeMethod('getData', args);
       healthData = fetchedDataPoints.map((e) {
+        String uuid = e["uuid"];
         num value = e["value"];
         DateTime from = DateTime.fromMillisecondsSinceEpoch(e["date_from"]);
         DateTime to = DateTime.fromMillisecondsSinceEpoch(e["date_to"]);
-        return HealthDataPoint._(
-            value, dataType, unit, from, to, _platformType, _deviceId);
+        return HealthDataPoint(
+            uuid, value, dataType, unit, from, to, _platformType, _deviceId);
       }).toList();
     } catch (error) {
       print("Health Plugin Error:\n");
