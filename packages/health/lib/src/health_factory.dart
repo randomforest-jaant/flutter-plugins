@@ -60,7 +60,9 @@ class HealthFactory {
           weights[i].dateFrom,
           weights[i].dateTo,
           _platformType,
-          _deviceId);
+          _deviceId,
+          null, // TODO fix source ID and name
+          null);
 
       bmiHealthPoints.add(x);
     }
@@ -124,8 +126,10 @@ class HealthFactory {
         num value = e["value"];
         DateTime from = DateTime.fromMillisecondsSinceEpoch(e["date_from"]);
         DateTime to = DateTime.fromMillisecondsSinceEpoch(e["date_to"]);
+        String sourceId = e["source_id"];
+        String sourceName = e["source_name"];
         return HealthDataPoint(
-            uuid, value, dataType, unit, from, to, _platformType, _deviceId);
+            uuid, value, dataType, unit, from, to, _platformType, _deviceId, sourceId, sourceName);
       }).toList();
     } catch (error) {
       print("Health Plugin Error:\n");

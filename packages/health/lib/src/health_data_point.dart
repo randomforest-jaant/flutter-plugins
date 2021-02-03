@@ -10,9 +10,20 @@ class HealthDataPoint {
   DateTime _dateTo;
   PlatformType _platform;
   String _deviceId;
+  String _sourceId;
+  String _sourceName;
 
-  HealthDataPoint(this.uuid, this._value, this._type, this._unit, this._dateFrom,
-      this._dateTo, this._platform, this._deviceId) {
+  HealthDataPoint(
+      this.uuid,
+      this._value,
+      this._type,
+      this._unit,
+      this._dateFrom,
+      this._dateTo,
+      this._platform,
+      this._deviceId,
+      this._sourceId,
+      this._sourceName) {
     /// Set the value to minutes rather than the category
     /// returned by the native API
     if (type == HealthDataType.MINDFULNESS ||
@@ -37,6 +48,8 @@ class HealthDataPoint {
     data['date_to'] = this.dateTo;
     data['data_type'] = this.type;
     data['platform_type'] = this.platform;
+    data['source_id'] = this.sourceId;
+    data['source_name'] = this.sourceName;
     return data;
   }
 
@@ -48,7 +61,9 @@ class HealthDataPoint {
       'dateFrom: $dateFrom, '
       'dateTo: $dateTo, '
       'dataType: $type,'
-      'platform: $platform';
+      'platform: $platform'
+      'sourceId: $sourceId,'
+      'sourceName: $sourceName,';
 
   /// Get the quantity value of the data point
   num get value => _value;
@@ -79,6 +94,14 @@ class HealthDataPoint {
   /// the data point was extracted
   String get deviceId => _deviceId;
 
+  /// Get the id of the source from which
+  /// the data point was extracted
+  String get sourceId => _sourceId;
+
+  /// Get the name of the source from which
+  /// the data point was extracted
+  String get sourceName => _sourceName;
+
   /// An equals (==) operator for comparing two data points
   /// This makes it possible to remove duplicate data points.
   bool operator ==(Object o) {
@@ -89,7 +112,9 @@ class HealthDataPoint {
         this.dateTo == o.dateTo &&
         this.type == o.type &&
         this.platform == o.platform &&
-        this.deviceId == o.deviceId;
+        this.deviceId == o.deviceId &&
+        this.sourceId == o.sourceId &&
+        this.sourceName == o.sourceName;
   }
 
   /// Override required due to overriding the '==' operator
