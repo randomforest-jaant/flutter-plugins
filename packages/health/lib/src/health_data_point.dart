@@ -94,5 +94,5 @@ class HealthDataPoint {
 
   /// Override required due to overriding the '==' operator
   @override
-  int get hashCode => toJson().hashCode;
+  int get hashCode => '$value $unit $dateFrom $dateTo $type'.hashCode;
 }
